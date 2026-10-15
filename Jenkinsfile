@@ -9,17 +9,15 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Website') {
             steps {
-                echo 'Building my DevOps project...'
-                bat 'dir'
+                bat 'if exist index.html (echo index.html found) else (exit 1)'
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Testing the website files...'
-                bat 'if exist index.html (echo index.html found) else (exit 1)'
+                bat 'docker build -t oggy-website:latest .'
             }
         }
     }
